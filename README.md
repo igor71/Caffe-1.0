@@ -3,12 +3,12 @@
 
 You can run one of the automatic [builds](https://hub.docker.com/r/bvlc/caffe). E.g. for the CPU version:
 
-`docker run -ti bvlc/caffe:cpu caffe --version`
+`docker run -it yi/caffe:cpu caffe --version`
 
 or for GPU support (You need a CUDA 8.0 capable driver and
 [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)):
 
-`nvidia-docker run -ti bvlc/caffe:gpu caffe --version`
+`nvidia-docker run -it yi/caffe:gpu caffe --version`
 
 You might see an error about libdc1394, ignore it.
 
@@ -26,7 +26,7 @@ Containers can also be used interactively, specifying e.g. `bash` or `ipython`
 instead of `caffe`.
 
 ```
-docker run -ti bvlc/caffe:cpu ipython
+docker run -it yi/caffe:cpu ipython
 import caffe
 ...
 ```
@@ -39,10 +39,10 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 
 Examples:
 
-`docker build -t caffe:cpu cpu`
+`docker build -t yi/caffe:cpu cpu`
 
-`docker build -t caffe:gpu gpu`
+`docker build -t yi/caffe:gpu gpu`
 
 You can also build Caffe and run the tests in the image:
 
-`docker run -ti caffe:cpu bash -c "cd /opt/caffe/build; make runtest"`
+`docker run -it yi/caffe:cpu bash -c "cd /opt/caffe/build; make runtest"`
