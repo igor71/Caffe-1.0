@@ -1,29 +1,29 @@
 ### Create caffe 1.0 docker image:
 ```
-docker build -t yi/caffe:cpu -f Dockerfile .
+docker build -t yi/caffe:gpu -f Dockerfile .
 ```
 
 ### Create caffe-tensorflow docker image:
 ```
-docker build -t yi/caffe:cpu-tf -f Dockerfile.tf .
+docker build -t yi/caffe:gpu-tf -f Dockerfile.tf .
 ```
 ### Running caffe docker image:
 ```
-docker run -it yi/caffe:cpu /bin/bash
+docker run -it yi/caffe:gpu /bin/bash
 python
 import caffe
 import tensorflow as tf
 ```
 ```
-docker run -ti yi/caffe:cpu ipython
+docker run -ti yi/caffe:gpu ipython
 ```
 ### Running caffe-tensorflow docker image:
 ```
-docker run -it yi/caffe:cpu-tf /bin/bash
+docker run -it yi/caffe:gpu-tf /bin/bash
 python
 import caffe
 import tensorflow as tf
 ```
 ```
-docker run -ti yi/caffe:cpu-tf ipython
+docker run -ti yi/caffe:gpu-tf ipython
 ```
