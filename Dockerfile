@@ -67,9 +67,11 @@ RUN chmod 400 /root/.ssh/id_rsa && \
 RUN git clone ssh://git@server_1/media/CODE_CENTRAL/Caffe_1.0 . && \
     pip install --upgrade pip && \
     cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
+    git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
     mkdir build && cd build && \
-    cmake -D CPU_ONLY=1 .. && \
+    cmake -D USE_CUDNN=1 -D USE_NCCL=1 .. && \
     make -j"$(nproc)"
+
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
