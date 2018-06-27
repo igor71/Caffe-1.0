@@ -20,7 +20,7 @@ by root. It also runs by default in a container-private folder.
 You can change this using flags, like user (-u), current directory, and volumes (-w and -v).
 E.g. this behaves like the usual caffe executable:
 
-`docker run --rm -u $(id -u):$(id -g) -v $(pwd):$(pwd) -w $(pwd) bvlc/caffe:cpu caffe train --solver=example_solver.prototxt`
+`docker run --rm -u $(id -u):$(id -g) -v $(pwd):$(pwd) -w $(pwd) yi/caffe:cpu caffe train --solver=example_solver.prototxt`
 
 Containers can also be used interactively, specifying e.g. `bash` or `ipython`
 instead of `caffe`.
