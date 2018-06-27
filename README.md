@@ -39,9 +39,9 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 
 Examples:
 
-`docker build -t yi/caffe:cpu cpu`
+`docker build -t yi/caffe:cpu -f Dockerfile .`
 
-`docker build -t yi/caffe:gpu gpu`
+`docker build -t yi/caffe:gpu -f Dockerfile.tf .`
 
 You can also build Caffe and run the tests in the image:
 
