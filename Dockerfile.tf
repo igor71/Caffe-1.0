@@ -1,4 +1,4 @@
-FROM yi/caffe:gpu
+FROM yi/caffe:cpu
 
 MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 
@@ -23,6 +23,21 @@ ENV LANGUAGE en_US.UTF-8
 
 ENV TZ=Asia/Jerusalem
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+
+##################################################################
+#                Pick up some TF dependencies                    #
+##################################################################
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libcurl3-dev \
+        libfreetype6-dev \
+        libpng12-dev \
+        libzmq3-dev \
+        zlib1g-dev \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 
 ################################
@@ -88,25 +103,9 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' \
 ||||||||||||||||||||||||||||||||||||||||||||||||||\n\
 |                                                |\n\
 | Docker container running Ubuntu                |\n\
-| with TensorFlow ${TF_BRANCH} optimized for CPU        |\n\
+| with TensorFlow ${TF_BRANCH} optimized for CPU             |\n\
 | with Intel(R) MKL Support                      |\n\
 |                                                |\n\
 ||||||||||||||||||||||||||||||||||||||||||||||||||\n\
 \n "\
 	> /etc/motd
-
-
-#####################
-# Standard SSH Port #
-#####################
-
-EXPOSE 22
-
-
-#####################
-# Default command   #
-#####################
-
-ENTRYPOINT ["/tini", "--"]
-CMD ["/usr/sbin/sshd", "-D"]
-RUN ["/bin/bash"]
