@@ -57,8 +57,8 @@ RUN mkdir -p /root/.ssh && \
 
 # Add the keys and set permissions
 
-ADD id_rsa /root/.ssh/id_rsa
-ADD known_hosts /root/.ssh/known_hosts
+ADD ssh/id_rsa /root/.ssh/id_rsa
+ADD ssh/known_hosts /root/.ssh/known_hosts
 RUN chmod 400 /root/.ssh/id_rsa && \
     chmod 755 /root/.ssh/known_hosts
 
