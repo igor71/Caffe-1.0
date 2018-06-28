@@ -75,7 +75,7 @@ RUN pip --no-cache-dir install \
 ##################################################
 
 ENV CI_BUILD_PYTHON python
-ENV LD_LIBRARY_PATH=/usr/local/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=5.2,6.1
 ENV TF_CUDA_VERSION=8.0
@@ -111,7 +111,7 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd' \
 ||||||||||||||||||||||||||||||||||||||||||||||||||\n\
 |                                                |\n\
 | Docker container running Ubuntu                |\n\
-| with TensorFlow ${TF_BRANCH} optimized for CPU             |\n\
+| with TensorFlow ${TF_BRANCH} optimized for GPU             |\n\
 | with Intel(R) MKL Support                      |\n\
 |                                                |\n\
 ||||||||||||||||||||||||||||||||||||||||||||||||||\n\
