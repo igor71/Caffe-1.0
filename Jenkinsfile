@@ -1,5 +1,5 @@
 pipeline {
-  agent {label 'yi-caff-tf'}
+  agent {label 'yi-caffe-tf'}
     stages {
         stage('Build Cafee 1.0 Docker Image') {
             steps {
