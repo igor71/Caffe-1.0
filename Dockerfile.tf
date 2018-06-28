@@ -1,4 +1,4 @@
-FROM yi/caffe:cpu
+FROM yi/caffe:gpu
 
 MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 
