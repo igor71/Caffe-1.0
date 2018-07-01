@@ -6,7 +6,6 @@ ARG CAFFE_VERSION=1.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
-        cmake \
         git \
         wget \
         ssh-client \
@@ -29,6 +28,28 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-pip \
         python-setuptools \
         python-scipy && \
+    rm -rf /var/lib/apt/lists/*
+    
+#######################################
+#            Installing cmake         #
+#######################################
+
+RUN \
+    cd ~ && \
+    version=3.11 && \
+    build=3 && \
+    mkdir ~/temp && \
+    cd temp && \
+    wget https://cmake.org/files/v$version/cmake-$version.$build.tar.gz && \
+    tar -xzvf cmake-$version.$build.tar.gz && \
+    cd cmake-$version.$build && \
+    ./bootstrap && \
+    make -j4 && \
+    make install && \
+    cmake --version && \
+    cd ~ && \
+    rm -rf temp && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CAFFE_ROOT=/opt/caffe
