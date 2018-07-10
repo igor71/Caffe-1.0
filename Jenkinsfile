@@ -6,7 +6,7 @@ pipeline {
 	       sh 'docker build -f Dockerfile -t yi/caffe:gpu .'  
             }
         }
-	stage('Test The yi/caffe:cpu Docker Image') { 
+	stage('Test The yi/caffe:gpu Docker Image') { 
             steps {
                 sh '''#!/bin/bash -xe
 		    echo 'Hello, YI-TFLOW!!'
@@ -20,7 +20,7 @@ pipeline {
                    ''' 
             }
         }
-        stage('Build The yi/caffe:cpu-tf Docker Image ') {
+        stage('Build The yi/caffe:gpu-tf Docker Image ') {
             steps {
 	       sh 'docker build -f Dockerfile.tf -t yi/caffe:gpu-tf .'  
             }
