@@ -2,7 +2,7 @@ FROM yi/caffe:gpu
 
 MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 
-ARG TFLOW=tensorflow-1.4.0-cp27-cp27mu-linux_x86_64.whl
+ARG TFLOW=tensorflow-1.8.0-cp27-cp27mu-linux_x86_64.whl
 
 ################################################
 #     Basic desktop environment                #
