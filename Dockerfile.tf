@@ -78,8 +78,8 @@ ENV CI_BUILD_PYTHON python
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=5.2,6.1
-ENV TF_CUDA_VERSION=9.0
-ENV TF_CUDNN_VERSION=7.0
+ENV TF_CUDA_VERSION=8.0
+ENV TF_CUDNN_VERSION=6.0
 RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1
 
 ################ INTEL MKL SUPPORT #################
