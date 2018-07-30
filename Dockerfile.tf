@@ -35,6 +35,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libpng12-dev \
         libzmq3-dev \
         zlib1g-dev \
+	pkg-config \
+        python-dev \
+        zlib1g-dev  \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -50,12 +53,10 @@ RUN curl -fSsL -O https://bootstrap.pypa.io/get-pip.py && \
 
 RUN pip --no-cache-dir install \
     ipykernel \
-    jupyter \
-    matplotlib \
-    numpy \
     scipy \
     sklearn \
     pandas \
+    numpy==1.14.5 \
     && \
     python -m ipykernel.kernelspec
 
