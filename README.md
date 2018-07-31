@@ -8,7 +8,7 @@ You can run one of the automatic [builds](https://hub.docker.com/r/bvlc/caffe). 
 or for GPU support (You need a CUDA 8.0 capable driver and
 [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)):
 
-`nvidia-docker run -it bvlc/caffe caffe:gpu --version`
+`nvidia-docker run -it bvlc/caffe:gpu caffe --version`
 
 You might see an error about libdc1394, ignore it.
 
