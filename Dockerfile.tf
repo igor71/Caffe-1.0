@@ -34,10 +34,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libfreetype6-dev \
         libpng12-dev \
         libzmq3-dev \
-        zlib1g-dev \
 	pkg-config \
         python-dev \
-        zlib1g-dev  \
+        zlib1g-dev \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -76,12 +75,11 @@ RUN pip --no-cache-dir install \
 ##################################################
 
 ENV CI_BUILD_PYTHON python
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64/stubs:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=5.2,6.1
 ENV TF_CUDA_VERSION=8.0
 ENV TF_CUDNN_VERSION=6.0
-RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1
 
 ################ INTEL MKL SUPPORT #################
 
