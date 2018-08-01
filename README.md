@@ -29,5 +29,7 @@ nvidia-docker run -ti yi/caffe:gpu-tf ipython
 
 nvidia-docker run -it yi/caffe:gpu caffe --version
 
+nvidia-docker run -ti yi/caffe:gpu-tf ipython -c "import tensorflow; print(tensorflow.__version__)"
+
 nvidia-docker run -ti yi/caffe:gpu-tf ipython /gpu_tf_check.py
 ```
