@@ -3,7 +3,7 @@
 
 You can run one of the automatic [builds](https://hub.docker.com/r/bvlc/caffe). E.g. for the CPU version:
 
-`docker run -it bvlc/caffe:cpu caffe --version`
+`docker run -it yi/caffe:cpu caffe --version`
 
 or for GPU support (You need a CUDA 8.0 capable driver and
 [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)):
@@ -48,3 +48,7 @@ You can also build Caffe and run the tests in the image:
 `docker run -it yi/caffe:cpu bash -c "cd /opt/caffe/build; make runtest"`
 
 Please Note, prior to build docker image need build from the sources Tensorflow CPU/GPU package on desired server
+
+### Install Caffe into existing yi/tflow-vnc:XXX docker version
+
+`docker build -t yi/tflow-vnc:XXX-caffe -f Dockerfile.caffe-tf .`
