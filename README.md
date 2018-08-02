@@ -27,7 +27,7 @@ import tensorflow as tf
 ```
 nvidia-docker run -ti yi/caffe:gpu-tf ipython
 
-nvidia-docker run -it yi/caffe:gpu caffe --version
+nvidia-docker run -it yi/caffe:gpu-tf caffe --version
 
 nvidia-docker run -ti yi/caffe:gpu-tf ipython -c "import tensorflow; print(tensorflow.__version__)"
 
