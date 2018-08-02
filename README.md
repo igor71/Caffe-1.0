@@ -50,5 +50,10 @@ You can also build Caffe and run the tests in the image:
 Please Note, prior to build docker image need build from the sources Tensorflow CPU/GPU package on desired server
 
 ### Install Caffe into existing yi/tflow-vnc:XXX docker image
+```
+git clone --branch=master --depth=1 https://github.com/igor71/Caffe-1.0/
 
-`docker build -t yi/tflow-vnc:XXX-caffe -f Dockerfile.caffe-tf .`
+cd Caffe-1.0
+
+docker build -t yi/tflow-vnc:XXX-caffe -f Dockerfile.caffe-tf .`
+```
