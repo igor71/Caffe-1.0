@@ -2,6 +2,8 @@ FROM yi/caffe:cpu
 
 LABEL MAINTAINER="Igor Rabkin<igor.rabkin@xiaoyi.com>"
 
+ARG TF_BRANCH=r1.8
+
 ################################################
 #          Basic desktop environment           #
 ################################################
