@@ -77,10 +77,10 @@ RUN pip --no-cache-dir install \
 
   RUN cd /
   ARG CRED="server:123server123"
-  RUN TF_BRANCH=$(echo $(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/CPU/ | sort -V | tail -n 1) | awk -F'[ ]' '{print $9}') && \
-      curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TF_BRANCH} -o ${TF_BRANCH} && \
-      pip --no-cache-dir install ${TF_BRANCH} && \
-      rm -f ${TF_BRANCH}
+  RUN TFLOW=$(echo $(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/CPU/ | sort -V | tail -n 1) | awk -F'[ ]' '{print $9}') && \
+      curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TFLOW} -o ${TFLOW} && \
+      pip --no-cache-dir install ${TFLOW} && \
+      rm -f ${TFLOW}
 
 ################# Setting UP Environment ###################
 ENV CI_BUILD_PYTHON=python \
