@@ -2,6 +2,9 @@ FROM yi/caffe:cpu
 
 LABEL MAINTAINER="Igor Rabkin<igor.rabkin@xiaoyi.com>"
 
+WORKDIR=/media/common/DOCKER_IMAGES/Tensorflow/CPU
+ARG TF_BRANCH=$(ls $WORKDIR | sort -V | tail -n 1)
+
 ################################################
 #          Basic desktop environment           #
 ################################################
@@ -69,11 +72,10 @@ RUN pip --no-cache-dir install wheel
 ###################################
 
   RUN cd /
-  ARG TFLOW=tensorflow-1.8.0-cp27-cp27mu-linux_x86_64.whl
   ARG CRED="server:123server123"
-  RUN  curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TFLOW} -o ${TFLOW} && \
-       pip --no-cache-dir install ${TFLOW} && \
-       rm -f ${TFLOW}
+  RUN  curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TF_BRANCH} -o ${TF_BRANCH} && \
+       pip --no-cache-dir install ${TF_BRANCH} && \
+       rm -f ${TF_BRANCH}
 
 ################# Setting UP Environment ###################
 ENV CI_BUILD_PYTHON=python \
