@@ -65,9 +65,10 @@ RUN pip --no-cache-dir install \
 
   RUN cd /
   ARG CRED="server:123server123"
-  RUN  curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/Current/${TFLOW} -o ${TFLOW} && \
-       pip --no-cache-dir install ${TFLOW} && \
-       rm -f ${TFLOW}
+  RUN TFLOW=$(echo $(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/Current/ | sort -V | tail -n 1) | awk -F'[ ]' '{print $9}') && \
+      curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/Current/${TFLOW} -o ${TFLOW} && \
+      pip --no-cache-dir install ${TFLOW} && \
+      rm -f ${TFLOW}
 
 
 ##################################################
