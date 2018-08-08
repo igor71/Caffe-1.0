@@ -2,9 +2,6 @@ FROM yi/caffe:cpu
 
 LABEL MAINTAINER="Igor Rabkin<igor.rabkin@xiaoyi.com>"
 
-ARG WORKDIR=/media/common/DOCKER_IMAGES/Tensorflow/CPU
-RUN TF_BRANCH=$(ls $WORKDIR | sort -V | tail -n 1)
-
 ################################################
 #          Basic desktop environment           #
 ################################################
@@ -65,7 +62,6 @@ RUN curl -fSsL -O https://bootstrap.pypa.io/get-pip.py && \
 
 RUN pip --no-cache-dir install --upgrade \
     pip setuptools
-RUN pip --no-cache-dir install wheel
 
 ###################################
 # Install TensorFlow GPU version. #
@@ -73,6 +69,7 @@ RUN pip --no-cache-dir install wheel
 
   RUN cd /
   ARG CRED="server:123server123"
+  TF_BRANCH=$(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/CPU/ | sort -V | tail -n 1)
   RUN  curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TF_BRANCH} -o ${TF_BRANCH} && \
        pip --no-cache-dir install ${TF_BRANCH} && \
        rm -f ${TF_BRANCH}
