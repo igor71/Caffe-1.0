@@ -2,7 +2,7 @@ FROM yi/caffe:cpu
 
 LABEL MAINTAINER="Igor Rabkin<igor.rabkin@xiaoyi.com>"
 
-WORKDIR=/media/common/DOCKER_IMAGES/Tensorflow/CPU
+ARG WORKDIR=/media/common/DOCKER_IMAGES/Tensorflow/CPU
 ARG TF_BRANCH=$(ls $WORKDIR | sort -V | tail -n 1)
 
 ################################################
