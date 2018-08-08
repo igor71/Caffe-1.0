@@ -69,7 +69,7 @@ RUN pip --no-cache-dir install --upgrade \
 
   RUN cd /
   ARG CRED="server:123server123"
-  ARG TF_BRANCH="$(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/CPU/ | sort -V | tail -n 1)"
+  ARG TF_BRANCH=$(echo $(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/CPU/ | sort -V | tail -n 1) | awk -F'[ ]' '{print $9}')
   RUN  curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TF_BRANCH} -o ${TF_BRANCH} && \
        pip --no-cache-dir install ${TF_BRANCH} && \
        rm -f ${TF_BRANCH}
