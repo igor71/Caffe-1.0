@@ -63,6 +63,12 @@ RUN curl -fSsL -O https://bootstrap.pypa.io/get-pip.py && \
 RUN pip --no-cache-dir install --upgrade \
     pip setuptools
 
+RUN pip --no-cache-dir install \
+    ipykernel \
+    numpy==1.14.5 \
+    && \
+    python -m ipykernel.kernelspec
+
 ###################################
 # Install TensorFlow GPU version. #
 ###################################
@@ -86,7 +92,6 @@ ENV CI_BUILD_PYTHON=python \
 ################ INTEL MKL SUPPORT #################
 ENV LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-ARG CRED="server:123server123"
 RUN cd /usr/local/lib && \
     curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libiomp5.so -o libiomp5.so && \
     curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libmklml_gnu.so -o libmklml_gnu.so && \
