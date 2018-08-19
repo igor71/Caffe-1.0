@@ -87,9 +87,9 @@ ENV TF_CUDNN_VERSION=7.0
 ENV LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 RUN cd /usr/local/lib && \
-    curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libiomp5.so -o libiomp5.so && \
-    curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libmklml_gnu.so -o libmklml_gnu.so && \
-    curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libmklml_intel.so -o libmklml_intel.so
+    curl -OSL ftp://jenkins-cloud/pub/LIB/libiomp5.so -o libiomp5.so && \
+    curl -OSL ftp://jenkins-cloud/pub/LIB/libmklml_gnu.so -o libmklml_gnu.so && \
+    curl -OSL ftp://jenkins-cloud/pub/LIB/libmklml_intel.so -o libmklml_intel.so
 
 ####################################################
 
