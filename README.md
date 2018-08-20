@@ -16,13 +16,13 @@ docker build -t yi/caffe:cpu-tf -f Dockerfile.tf .
 ```
 ### Running caffe docker image:
 ```
-docker run -it yi/caffe:cpu /bin/bash
+docker run -it yi/caffe:cpu-tf /bin/bash
 python
 import caffe
 import tensorflow as tf
 ```
 ```
-docker run -ti yi/caffe:cpu ipython
+docker run -ti yi/caffe:cpu-tf ipython
 ```
 ### Running caffe-tensorflow docker image:
 ```
@@ -34,7 +34,7 @@ import tensorflow as tf
 ```
 docker run -ti yi/caffe:cpu-tf ipython
 
-docker run -it yi/caffe:cpu caffe --version
+docker run -it yi/caffe:cpu-tf caffe --version
 
 docker run -ti yi/caffe:cpu-tf ipython /cpu_tf_check.py
 ```
