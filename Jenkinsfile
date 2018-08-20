@@ -46,7 +46,7 @@ pipeline {
                         docker save yi/caffe:gpu-tf | pv | cat > "$WORKSPACE/yi-caffe-gpu-tf.tar"
 			
                         echo 'Remove Original Docker Image' 
-			CURRENT_ID=$(docker images | grep -E '^yi/caffe.*gpu-tf' | awk -e '{print $3}')
+			CURRENT_ID=$(docker images | grep -E '^yi/caffe.*gpu-tf' | awk '{print $3}')
 			docker rmi -f $CURRENT_ID
 			
                         echo 'Loading Docker Image'
