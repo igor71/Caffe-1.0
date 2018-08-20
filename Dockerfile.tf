@@ -72,13 +72,11 @@ RUN pip --no-cache-dir install \
     python -m ipykernel.kernelspec
 
 ###################################
-# Install TensorFlow GPU version. #
+# Install TensorFlow CPU version. #
 ###################################
-
   RUN cd /
-  ARG CRED="server:123server123"
-  RUN TFLOW=$(echo $(curl ftp://$CRED@yifileserver/DOCKER_IMAGES/Tensorflow/CPU/ | sort -V | tail -n 1) | awk -F'[ ]' '{print $9}') && \
-      curl -u ${CRED} ftp://yifileserver/DOCKER_IMAGES/Tensorflow/CPU/${TFLOW} -o ${TFLOW} && \
+  RUN TFLOW=$(echo $(curl ftp://jenkins-cloud/pub/Current/ | sort -V | tail -n 1) | awk -F'[ ]' '{print $9}') && \
+      curl -OSL ftp://jenkins-cloud/pub/Current/${TFLOW} -o ${TFLOW} && \
       pip --no-cache-dir install ${TFLOW} && \
       rm -f ${TFLOW}
 
@@ -95,9 +93,9 @@ ENV CI_BUILD_PYTHON=python \
 ENV LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 RUN cd /usr/local/lib && \
-    curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libiomp5.so -o libiomp5.so && \
-    curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libmklml_gnu.so -o libmklml_gnu.so && \
-    curl -u ${CRED} ftp://yifileserver/IT/YiIT/lib/libmklml_intel.so -o libmklml_intel.so
+    curl -OSL ftp://jenkins-cloud/pub/LIB/libiomp5.so -o libiomp5.so && \
+    curl -OSL ftp://jenkins-cloud/pub/LIB/libmklml_gnu.so -o libmklml_gnu.so && \
+    curl -OSL ftp://jenkins-cloud/pub/LIB/libmklml_intel.so -o libmklml_intel.so
 
 ####################################################
 
