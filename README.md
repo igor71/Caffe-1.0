@@ -1,3 +1,10 @@
+### How-TO
+```
+1. Make sure ubuntu:16.04 image existing on the target server
+2. Make sure desired tensorflow package in .../Tensorflow/Current folder
+3. Run parametrized Jenkins job and chose target server to build docker images
+```
+
 ### Create caffe 1.0 docker image:
 ```
 docker build -t yi/caffe:cpu -f Dockerfile .
