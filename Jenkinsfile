@@ -45,18 +45,19 @@ pipeline {
 		        echo 'Saving Docker image into tar archive'
                         docker save yi/caffe:gpu-tf | pv | cat > $WORKSPACE/yi-caffe-gpu-tf.tar
 			
-                        echo 'Remove Original Docker Image' 
-			docker rmi -f $caffe_tf_image_id
+                        echo 'Remove Original Docker Image'
+			CURRENT_ID=$(docker images | grep -E '^yi/caffe.*gpu-tf' | awk '{print $3}')
+			docker rmi -f $CURRENT_ID
 			
                         echo 'Loading Docker Image'
                         pv $WORKSPACE/yi-caffe-gpu-tf.tar | docker load
-			docker tag $caffe_tf_image_id yi/caffe:gpu-tf
+			docker tag $CURRENT_ID yi/caffe:gpu-tf
                         
                         echo 'Removing temp archive.'  
                         rm $WORKSPACE/yi-caffe-gpu-tf.tar
 				
 			echo 'Removing yi/caffe:gpu Docker Image'
-			docker rmi -f $caffe_image_id
+			docker rmi -f yi/caffe:gpu
                    ''' 
 		    }
 		}
