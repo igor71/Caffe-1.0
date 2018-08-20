@@ -1,7 +1,7 @@
 ### How-TO
 ```
 1. Make sure nvidia/cuda:X.0-cudnnX-devel-ubuntu16.04 image existing on the target server
-2. Make sure desiredtensorflow package in .../Tensorflow/Current folder
+2. Make sure desired tensorflow package in .../Tensorflow/Current folder
 3. Run parametrized Jenkins job and chose target server to build docker images
 ```
 
