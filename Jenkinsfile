@@ -43,7 +43,8 @@ pipeline {
             steps {
                 sh '''#!/bin/bash -xe
 		        echo 'Saving Docker image into tar archive'
-                        docker save yi/caffe:gpu-tf | pv | cat > $WORKSPACE/yi-caffe-gpu-tf.tar
+                        docker save yi/caffe:gpu-tf | pv | cat > "$WORKSPACE/yi-caffe-gpu-tf.tar"
+			
                         echo 'Remove Original Docker Image' 
 			CURRENT_ID=$(docker images | grep -E '^yi/caffe.*gpu-tf' | awk -e '{print $3}')
 			docker rmi -f $CURRENT_ID
