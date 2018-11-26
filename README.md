@@ -55,5 +55,5 @@ git clone --branch=master --depth=1 https://github.com/igor71/Caffe-1.0/
 
 cd Caffe-1.0
 
-docker build -t yi/tflow-vnc:XXX-caffe -f Dockerfile.caffe-tf .`
+docker build -t yi/tflow-vnc:X.X.X-caffe -f Dockerfile.caffe-tf .
 ```
