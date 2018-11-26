@@ -1,4 +1,4 @@
-FROM yi/tflow-vnc:1.8.0
+FROM yi/tflow-vnc:1.9.0-python-2.7
 
 MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 
