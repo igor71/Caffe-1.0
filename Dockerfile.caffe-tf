@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN \
     cd ~ && \
-    version=3.11 && \
+    version=3.12 && \
     build=3 && \
     mkdir ~/temp && \
     cd temp && \
@@ -44,7 +44,8 @@ RUN \
     tar -xzvf cmake-$version.$build.tar.gz && \
     cd cmake-$version.$build && \
     ./bootstrap && \
-    make -j4 && \
+    nc=`nproc` && \
+    make -j$nc && \
     make install && \
     cmake --version && \
     cd ~ && \
@@ -93,7 +94,7 @@ RUN git clone ssh://git@server_1/media/CODE_CENTRAL/Caffe_1.0 . && \
     mkdir build && cd build && \
     cmake -D CUDA_ARCH_NAME=Manual -D CUDA_ARCH_BIN="${CUDA_ARCH_BIN}" \
           -D USE_CUDNN=1 -D USE_NCCL=1 .. && \
-    make -j"$(nproc)"
+    make -j$nc
 
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
