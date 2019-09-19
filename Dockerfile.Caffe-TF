@@ -1,4 +1,4 @@
-FROM yi/tflow-vnc:gui-latest
+FROM yi/tflow-vnc:latest
 
 MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 
