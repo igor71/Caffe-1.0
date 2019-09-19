@@ -51,7 +51,7 @@ git clone --branch=gpu-py-3.6 --depth=1 https://github.com/igor71/Caffe-1.0/
 
 cd Caffe-1.0
 
-docker build -f Dockerfile.Caffe-TF -t yi/tflow-vnc:caffe-python-3.6 .
+docker build -f Dockerfile.Caffe -t yi/tflow-vnc:caffe-python-3.6 .
 ```
 You can also build original Caffe docker image and run the tests inside:
 
