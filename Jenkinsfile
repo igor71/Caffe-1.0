@@ -9,10 +9,10 @@ pipeline {
                       echo "Available Basic Docker Image Is: $image_id"
                     
                    # Check If Docker Image Exist On Desired Server 
-		                 if [ "$image_id" == "" ]; then
-		                     echo "Docker Image Does Not Exist!!!"
-			               pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
-                         docker tag 0a1b1a956cdb yi/tflow-gui:latest
+		     if [ "$image_id" == "" ]; then
+		         echo "Docker Image Does Not Exist!!!"
+		         pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
+		         docker tag 0a1b1a956cdb yi/tflow-gui:latest
                      elif [ "$image_id" != "0a1b1a956cdb" ]; then
                          echo "Wrong Docker Image!!! Removing..."
                          docker rmi -f yi/tflow-gui:latest
@@ -30,8 +30,8 @@ pipeline {
                         SRV=$(echo ${target_server} | awk -F [-] '{print $2}')
                         curl -OSL ftp://jenkins-cloud/pub/map.csv -o map.csv
                         FTP_PATH=$(awk -F [,] -v srv="$SRV" '$6==srv' map.csv|  awk -F [,] -v cuda_version="$cuda_version" '$2==cuda_version'  |  awk -F [,] -v python_version="$python_version" '$5==python_version' | awk -F [,] -v tf_version="$tensorflow_version" '$7~tf_version' | awk -F, '{print $4}')
-			                  FILE_NAME=$(echo $FTP_PATH | awk -F [/] '{print $6}')
-	       		            docker build --build-arg FILE_NAME=${FILE_NAME} --build-arg FTP_PATH=${FTP_PATH} -f Dockerfile-tf-${python_version} -t yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} .
+			FILE_NAME=$(echo $FTP_PATH | awk -F [/] '{print $6}')
+	       		docker build --build-arg FILE_NAME=${FILE_NAME} --build-arg FTP_PATH=${FTP_PATH} -f Dockerfile.Caffe-TF -t yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} .
 		            ''' 
             }
         }
@@ -56,12 +56,12 @@ pipeline {
                       docker save yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} | pv | cat > $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar
 			
                      echo 'Remove Original Docker Image' 
-			               CURRENT_ID=$(docker images | grep -E '^yi/tflow-vnc.*'caffe-${tensorflow_version}-python-${python_version}'' | awk -e '{print $3}')
-			               docker rmi -f yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version}
+		     CURRENT_ID=$(docker images | grep -E '^yi/tflow-vnc.*'caffe-${tensorflow_version}-python-${python_version}'' | awk -e '{print $3}')
+		     docker rmi -f yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version}
 			
                      echo 'Loading Docker Image'
                      pv -f $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar | docker load
-			               docker tag $CURRENT_ID yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} 
+		     docker tag $CURRENT_ID yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} 
                         
                      echo 'Removing temp archive.'  
                      rm $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar
