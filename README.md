@@ -59,3 +59,26 @@ You can also build original Caffe docker image and run the tests inside:
 
 Please Note, prior to build docker image need build from the sources Tensorflow CPU/GPU package on desired server
 
+
+### Running Benchmart tests
+```
+yi-docker-run <<container_ID>>
+
+yi-dockeradmin <<container_name>>
+
+cd $CAFFE_ROOT
+
+./data/mnist/get_mnist.sh
+
+./examples/mnist/create_mnist.sh
+```
+Run Benchmark on CPU:
+
+`./build/tools/caffe time --model=examples/mnist/lenet_train_test.prototxt`
+
+Run Benchmark on GPU:
+
+`./build/tools/caffe time --model=examples/mnist/lenet_train_test.prototxt --gpu 0`
+
+
+
