@@ -43,7 +43,7 @@ The caffe build requirements are included in the container, so this can be used 
 build and run custom versions of caffe. Also, `caffe/python` is in PATH, so python
 utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py`.
 
-### Building images yourself
+### Building Caffe only images yourself
 
 Example:
 ```
