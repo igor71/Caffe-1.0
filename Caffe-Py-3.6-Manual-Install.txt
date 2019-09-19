@@ -93,32 +93,4 @@
    make pycaffe -j$nc
 
    make runtest -j$nc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-cmake -D CUDA_ARCH_NAME=Manual -D CUDA_ARCH_BIN="${CUDA_ARCH_BIN}" -D USE_CUDNN=1 -D USE_NCCL=1 ..
-
-
-
-make all -j$nc
-
-make pycaffe -j$nc
-
-make runtest -j$nc
-
-
-          
+   
