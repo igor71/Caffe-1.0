@@ -4,24 +4,24 @@ pipeline {
         stage('Import yi/tflow-gui Docker Image') {
             steps {
                 sh '''#!/bin/bash -xe
-                   # Bacic Docker Image With Tensorflow & Caffe Based on Ubuntu 18 
+                   # Bacic Docker Image For Tensorflow Version 2.0
                       image_id="$(docker images -q yi/tflow-gui:latest)"
                       echo "Available Basic Docker Image Is: $image_id"
                     
                    # Check If Docker Image Exist On Desired Server 
-		     if [ "$image_id" == "" ]; then
-		         echo "Docker Image Does Not Exist!!!"
-		         pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
-		         docker tag 0a1b1a956cdb yi/tflow-gui:latest
-                     elif [ "$image_id" != "0a1b1a956cdb" ]; then
-                         echo "Wrong Docker Image!!! Removing..."
-                         docker rmi -f yi/tflow-gui:latest
-                         pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
-                         docker tag 0a1b1a956cdb yi/tflow-gui:latest
-                     else
-                         echo "Docker Image Already Exist"
-                     fi
-		            ''' 
+		         if [ "$image_id" == "" ]; then
+                            echo "Docker Image Does Not Exist!!!"
+                            pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
+                            docker tag 0a1b1a956cdb yi/tflow-gui:latest
+                         elif [ "$image_id" != "0a1b1a956cdb" ]; then
+		            echo "Wrong Docker Image!!! Removing..."
+                            docker rmi -f yi/tflow-gui:latest
+                            pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
+                            docker tag 0a1b1a956cdb yi/tflow-gui:latest
+                         else
+                            echo "Docker Image Already Exist"
+                      fi
+		   '''  
             }
         }
         stage('Build Docker Image ') {
@@ -30,9 +30,9 @@ pipeline {
                         SRV=$(echo ${target_server} | awk -F [-] '{print $2}')
                         curl -OSL ftp://jenkins-cloud/pub/map.csv -o map.csv
                         FTP_PATH=$(awk -F [,] -v srv="$SRV" '$6==srv' map.csv|  awk -F [,] -v cuda_version="$cuda_version" '$2==cuda_version'  |  awk -F [,] -v python_version="$python_version" '$5==python_version' | awk -F [,] -v tf_version="$tensorflow_version" '$7~tf_version' | awk -F, '{print $4}')
-			FILE_NAME=$(echo $FTP_PATH | awk -F [/] '{print $6}')
-	       		docker build --build-arg FILE_NAME=${FILE_NAME} --build-arg FTP_PATH=${FTP_PATH} -f Dockerfile.Caffe-TF -t yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} .
-		            ''' 
+                        FILE_NAME=$(echo $FTP_PATH | awk -F [/] '{print $6}')
+	       		docker build --build-arg FILE_NAME=${FILE_NAME} --build-arg FTP_PATH=${FTP_PATH} -f Dockerfile -t yi/tflow-vnc:${tensorflow_version}-python-${python_version} .
+		   ''' 
             }
         }
 	    stage('Test Docker Image') { 
