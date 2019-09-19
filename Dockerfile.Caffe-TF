@@ -69,27 +69,27 @@ ENV CUDA_ARCH_BIN="35 52 60 61"
 RUN cd /opt && \
     git clone https://github.com/BVLC/caffe.git && \
     cd caffe/python && \
-	sed -i 's/python-dateutil>=1.4,<2/python-dateutil>=2.6.1/g' requirements.txt && \
-	for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
-	sed -i '425d' Makefile && \
-	sed -i '424 a NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)' Makefile && \
-	curl -OSL ftp://jenkins-cloud/pub/Tflow-VNC-Soft/Caffe/Makefile.config -o Makefile.config && \
+    sed -i 's/python-dateutil>=1.4,<2/python-dateutil>=2.6.1/g' requirements.txt && \
+    for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
+    sed -i '425d' Makefile && \
+    sed -i '424 a NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)' Makefile && \
+    curl -OSL ftp://jenkins-cloud/pub/Tflow-VNC-Soft/Caffe/Makefile.config -o Makefile.config && \
     git clone https://github.com/NVIDIA/nccl.git && cd nccl && \
-	sed -i '28d' makefiles/common.mk && \
-	sed -i '28d' makefiles/common.mk && \
-	sed -i '27 a CUDA8_GENCODE = -gencode=arch=compute_35,code=sm_35 \\' makefiles/common.mk && \
-	make -j$nc install && cd .. && rm -rf nccl && \
-	updatedb && \
-	locate nccl| grep "libnccl.so" | tail -n1 | sed -r 's/^.*\.so\.//' && \
+    sed -i '28d' makefiles/common.mk && \
+    sed -i '28d' makefiles/common.mk && \
+    sed -i '27 a CUDA8_GENCODE = -gencode=arch=compute_35,code=sm_35 \\' makefiles/common.mk && \
+    make -j$nc install && cd .. && rm -rf nccl && \
+    updatedb && \
+    locate nccl| grep "libnccl.so" | tail -n1 | sed -r 's/^.*\.so\.//' && \
     mkdir build && \
-	sed -i '35d' CMakeLists.txt && \
-	sed -i '34 a set(python_version "3" CACHE STRING "Specify which Python version to use")' CMakeLists.txt && \
-	cd build && \
+    sed -i '35d' CMakeLists.txt && \
+    sed -i '34 a set(python_version "3" CACHE STRING "Specify which Python version to use")' CMakeLists.txt && \
+    cd build && \
     cmake -D CUDA_ARCH_NAME=Manual -D CUDA_ARCH_BIN="${CUDA_ARCH_BIN}" \
           -D USE_CUDNN=1 -D USE_NCCL=1 .. && \
     make -j$nc && \
-	make pycaffe -j$nc && \
-	apt-get clean && \
+    make pycaffe -j$nc && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 	
 ENV CAFFE_ROOT=/opt/caffe	
@@ -112,9 +112,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-tk && \    
     apt-get clean && \ 
     rm -rf /var/lib/apt/lists/* && \
-	curl -SL ftp://jenkins-cloud/pub/Tflow-VNC-Soft/Caffe/tf_requirements.txt -o /tmp/tf_requirements.txt && \
-	for tf_req in $(cat /tmp/tf_requirements.txt); do pip --no-cache-dir install $tf_req; done && \
-	python -m ipykernel.kernelspec && \
+    curl -SL ftp://jenkins-cloud/pub/Tflow-VNC-Soft/Caffe/tf_requirements.txt -o /tmp/tf_requirements.txt && \
+    for tf_req in $(cat /tmp/tf_requirements.txt); do pip --no-cache-dir install $tf_req; done && \
+    python -m ipykernel.kernelspec && \
     apt-get clean && \ 
     rm -rf /var/lib/apt/lists/*
 	
