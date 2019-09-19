@@ -60,7 +60,7 @@ You can also build original Caffe docker image and run the tests inside:
 Please Note, prior to build docker image need build from the sources Tensorflow CPU/GPU package on desired server
 
 
-### Running Benchmart tests
+### Running Benchmark Tests
 ```
 yi-docker-run <<container_ID>>
 
