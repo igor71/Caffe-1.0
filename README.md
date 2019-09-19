@@ -46,20 +46,16 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 ### Building images yourself
 
 Example:
+```
+git clone --branch=gpu-py-3.6 --depth=1 https://github.com/igor71/Caffe-1.0/
 
-`docker build -f Dockerfile-Caffe-tf -t yi/tflow-vnc:caffe-tf . .`
+cd Caffe-1.0
 
+docker build -f Dockerfile.Caffe-TF -t yi/tflow-vnc:caffe-python-3.6 .
+```
 You can also build original Caffe docker image and run the tests inside:
 
 `docker run -it bvlc/caffe:gpu ipython bash -c "cd /opt/caffe/build; make runtest"`
 
 Please Note, prior to build docker image need build from the sources Tensorflow CPU/GPU package on desired server
 
-### Install Caffe into existing yi/tflow-vnc:XXX docker image
-```
-git clone --branch=gpu-py-3.6 --depth=1 https://github.com/igor71/Caffe-1.0/
-
-cd Caffe-1.0
-
-docker build -t yi/tflow-vnc:X.X.X-caffe -f Dockerfile.Caffe .
-```
