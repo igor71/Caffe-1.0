@@ -29,7 +29,6 @@ RUN apt-get update && apt-get install -y software-properties-common curl wget pv
     add-apt-repository ppa:jonathonf/python-3.6 && \
     apt-get update && apt-get install -y --no-install-recommends \
     python3.6 \
-    python3-distutils \
     python3.6-dev \
     python3.6-venv \
     && \ 
