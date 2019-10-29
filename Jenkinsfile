@@ -4,20 +4,20 @@ pipeline {
         stage('Import yi/tflow-gui Docker Image') {
             steps {
                 sh '''#!/bin/bash -xe
-                   # Bacic Docker Image For Tensorflow Version 2.0
+                   # Bacic Docker Image For Tensorflow Version 1.12
                       image_id="$(docker images -q yi/tflow-gui:latest)"
                       echo "Available Basic Docker Image Is: $image_id"
                     
                    # Check If Docker Image Exist On Desired Server 
 		         if [ "$image_id" == "" ]; then
                             echo "Docker Image Does Not Exist!!!"
-                            pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
-                            docker tag 0a1b1a956cdb yi/tflow-gui:latest
-                         elif [ "$image_id" != "0a1b1a956cdb" ]; then
+                            pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/9.0-cudnn7-base/yi-tflow-gui-1.12-new/yi-tflow-gui-1.12.tar | docker load
+                            docker tag bdccc25c5e3d yi/tflow-gui:latest
+                         elif [ "$image_id" != "bdccc25c5e3d" ]; then
 		            echo "Wrong Docker Image!!! Removing..."
                             docker rmi -f yi/tflow-gui:latest
-                            pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
-                            docker tag 0a1b1a956cdb yi/tflow-gui:latest
+                            pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/9.0-cudnn7-base/yi-tflow-gui-1.12-new/yi-tflow-gui-1.12.tar | docker load
+                            docker tag bdccc25c5e3d yi/tflow-gui:latest
                          else
                             echo "Docker Image Already Exist"
                       fi
@@ -52,7 +52,7 @@ pipeline {
 		stage('Save & Load Docker Image') { 
             steps {
                 sh '''#!/bin/bash -xe
-		                  echo 'Saving Docker image into tar archive'
+		      echo 'Saving Docker image into tar archive'
                       docker save yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} | pv | cat > $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar
 			
                      echo 'Remove Original Docker Image' 
@@ -65,6 +65,9 @@ pipeline {
                         
                      echo 'Removing temp archive.'  
                      rm $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar
+		     
+		     echo 'Removing Basic Docker Image'
+		     docker rmi -f yi/tflow-gui:latest
                    ''' 
 		    }
 		}
