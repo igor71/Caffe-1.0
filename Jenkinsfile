@@ -52,7 +52,7 @@ pipeline {
 		stage('Save & Load Docker Image') { 
             steps {
                 sh '''#!/bin/bash -xe
-		                  echo 'Saving Docker image into tar archive'
+		      echo 'Saving Docker image into tar archive'
                       docker save yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} | pv | cat > $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar
 			
                      echo 'Remove Original Docker Image' 
