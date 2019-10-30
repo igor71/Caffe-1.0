@@ -47,7 +47,7 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 
 Example:
 ```
-git clone --branch=gpu-py-3.6 --depth=1 https://github.com/igor71/Caffe-1.0/
+git clone --branch=gpu-ubuntu-16-py-3.6-CUDA-9 --depth=1 https://github.com/igor71/Caffe-1.0/
 
 cd Caffe-1.0
 
