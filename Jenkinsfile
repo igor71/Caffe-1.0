@@ -64,7 +64,7 @@ pipeline {
 		     docker tag $CURRENT_ID yi/tflow-vnc:caffe-${tensorflow_version}-python-${python_version} 
                         
                      echo 'Removing temp archive.'  
-                     rm -f $WORKSPACE/yi-tflow-vnc-caffe-${tensorflow_version}-python-${python_version}.tar
+                     rm -f $WORKSPACE/yi-tflow-vnc-caffe-*.tar
 		     
 		     echo "Removing Basic docker image'
 		     docker rmi -f yi/tflow-gui:latest
