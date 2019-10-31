@@ -45,6 +45,8 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 
 ### Building Caffe only images yourself
 
+*Note, this image will use distributed python v.3.5.2 as default for all users*
+
 Example:
 ```
 image_id="$(docker images -q yi/tflow-gui:latest)"
@@ -59,9 +61,9 @@ git clone --branch=gpu-ubuntu-16-py-3.6-CUDA-9 --depth=1 https://github.com/igor
 
 cd Caffe-1.0
 
-docker build -f Dockerfile.Caffe -t yi/tflow-vnc:caffe-python-3.6 .
+docker build -f Dockerfile.Caffe -t yi/tflow-vnc:caffe-python-3.5 .
 
-yi-docker tflow-vnc run :<port_number> --version=caffe-python-3.6
+yi-docker tflow-vnc run :<port_number> --version=caffe-python-3.5
 
 yi-dockeradmin $USER-tflow-vnc
 ```
