@@ -51,7 +51,7 @@ image_id="$(docker images -q yi/tflow-gui:latest)"
 
 if [ "$image_id" != "b957ba8c24f2" ]; then docker rmi -f yi/tflow-gui:latest; fi
 
-pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/9.0-cudnn7-base/yi-tflow-gui-1.13.tarr | docker load
+pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/9.0-cudnn7-base/yi-tflow-gui-1.13.tar | docker load
 
 docker tag b957ba8c24f2 yi/tflow-gui:latest
 
