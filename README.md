@@ -63,7 +63,7 @@ docker build -f Dockerfile.Caffe -t yi/tflow-vnc:caffe-python-3.6 .
 
 yi-docker tflow-vnc run :<port_number> --version=caffe-python-3.6
 
-yi-dokeradmin $USER-tflow-vnc
+yi-dockeradmin $USER-tflow-vnc
 ```
 You can also build original Caffe docker image and run the tests inside:
 
