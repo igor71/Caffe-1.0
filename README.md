@@ -47,9 +47,13 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 
 Example:
 ```
-pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/Ubuntu-18/yi-tflow-gui-latest.tar | docker load
+image_id="$(docker images -q yi/tflow-gui:latest)"
 
-docker tag 0a1b1a956cdb yi/tflow-gui:latest
+if [ "$image_id" != "dddf36d8bb2d" ]; then docker rmi -f yi/tflow-gui:latest; fi
+
+pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/10.0-cudnn7-base/yi-tflow-gui-horovod-cuda-10.tar | docker load
+
+docker tag dddf36d8bb2d yi/tflow-gui:latest
 
 git clone --branch=gpu-py-3.6 --depth=1 https://github.com/igor71/Caffe-1.0/
 
