@@ -47,11 +47,23 @@ utilities can be used directly, e.g. `draw_net.py`, `classify.py`, or `detect.py
 
 Example:
 ```
+image_id="$(docker images -q yi/tflow-gui:latest)"
+
+if [ "$image_id" != "456a5f44c255" ]; then docker rmi -f yi/tflow-gui:latest; fi
+
+pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/9.0-cudnn7-base/yi-tflow-gui-1.13.tarr | docker load
+
+docker tag 456a5f44c255 yi/tflow-gui:latest
+
 git clone --branch=gpu-ubuntu-16-py-3.6-CUDA-9 --depth=1 https://github.com/igor71/Caffe-1.0/
 
 cd Caffe-1.0
 
 docker build -f Dockerfile.Caffe -t yi/tflow-vnc:caffe-python-3.6 .
+
+yi-docker tflow-vnc run :<port_number> --version=caffe-python-3.6
+
+yi-dockeradmin $USER-tflow-vnc
 ```
 You can also build original Caffe docker image and run the tests inside:
 
