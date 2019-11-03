@@ -119,7 +119,9 @@ ARG FTP_PATH
 ARG FILE_NAME
 RUN curl -OSL ${FTP_PATH} -o ${FILE_NAME} && \
     pip --no-cache-dir install --upgrade ${FILE_NAME} && \
-    rm -f ${FILE_NAME}  
+    rm -f ${FILE_NAME} && \
+## Verify Tensorflow Installation
+python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
     
  
 ##################################################
