@@ -34,18 +34,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          apt-utils \
          mlocate \
          doxygen \		 
-         libatlas-base-dev \ 
-         libboost-all-dev \ 
-         libgflags-dev \ 
-         libgoogle-glog-dev \ 
-         libhdf5-serial-dev \ 
-         libleveldb-dev \ 
-         liblmdb-dev \ 
-         libopencv-dev \ 
-         libprotobuf-dev \ 
-         libsnappy-dev \
-         libopenblas-dev \		 
-         protobuf-compiler 
+	 libfreetype6-dev \
+	 libpng12-dev \ 
+	 libzmq3-dev \
+	 libcurl3-dev \
+	 libgoogle-perftools-dev \		 
+	 pkg-config \  
+	 python3-tk && \    
+	 apt-get clean && \ 
+         rm -rf /var/lib/apt/lists/* 
 	 
 	 
 #######################################
@@ -68,30 +65,12 @@ RUN \
     cd ~ && \
     rm -rf temp
     
-  
-#######################################
-#          Set ENV Variables          #
-#######################################
-
-ENV PYTHONPATH="${PYTHONPATH}:/opt/caffe/python"
-ENV CUDA_ARCH_BIN="52 61 70" 
- 
  
 ################################################################## 
 #              Pick up some TF dependencies                      #
 ##################################################################
 
-RUN apt-get update && apt-get install -y --no-install-recommends \ 		 
-    libfreetype6-dev \
-    libpng-dev \ 
-    libzmq3-dev \
-    libcurl3-dev \
-    libgoogle-perftools-dev \		 
-    pkg-config \  
-    python3-tk && \    
-    apt-get clean && \ 
-    rm -rf /var/lib/apt/lists/* && \
-    curl -SL ftp://jenkins-cloud/pub/Tflow-VNC-Soft/Caffe/tf_requirements.txt -o /tmp/tf_requirements.txt && \
+RUN curl -SL ftp://jenkins-cloud/pub/Tflow-VNC-Soft/Caffe/tf_requirements.txt -o /tmp/tf_requirements.txt && \
     for tf_req in $(cat /tmp/tf_requirements.txt); do ${PY} -m pip --no-cache-dir install $tf_req; done && \
     ${PY} -m ipykernel.kernelspec && \
     apt-get clean && \ 
