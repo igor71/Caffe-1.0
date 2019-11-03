@@ -6,28 +6,26 @@ MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 #            Installing Dependences For Python v. 3.6.8           #
 ###################################################################
 
-RUN apt-get update &&  apt-get install -y --no-install-recommends \
-    apt-utils \
-    python3-setuptools \
-    python3-dev 
-
-
-###########################################################
-#            Setting Python3 Alias For All Users          #
-###########################################################
-
-RUN sed -i '$a\\' /etc/bash.bashrc && \
-    sed -i '$a\###### Use Python 3.5 by default ###########\' /etc/bash.bashrc && \
-    sed -i '$a\alias python='python3.5'\' /etc/bash.bashrc && \
-    sed -i '$a\############################################\' /etc/bash.bashrc
-
-ARG PY=python3.5
+RUN add-apt-repository ppa:jonathonf/python-3.6 && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    python3.6 \
+    python3.6-dev \
+    python3.6-venv \
+    && \ 
+    apt-get clean && \ 
+    rm -rf /var/lib/apt/lists/*
+	
+RUN ln -s /usr/bin/python3.6 /usr/local/bin/python3 && \
+    ln -s /usr/local/bin/pip /usr/local/bin/pip3 && \
+    ln -s /usr/bin/python3.6 /usr/local/bin/python
+ 
+ARG PY=python3.6 
 RUN ${PY} --version && \
     curl -fSsL -O ftp://jenkins-cloud/pub/Develop/get-pip.py && \
     ${PY} get-pip.py && \
-    rm get-pip.py
-    
-    
+    rm get-pip.py 
+
+ 
 ############################################################
 #            Installing Caffe & Python Dependences         #
 ############################################################
@@ -154,6 +152,18 @@ COPY pip.conf $INSTALL_DIR
 RUN ${PY} -m pip install xiaoyi --upgrade &&\
     apt-get clean && \ 
     rm -rf /var/lib/apt/lists/*
+    
+    
+###################################
+# Install TensorFlow GPU version. #
+###################################
+
+RUN cd /
+ARG FTP_PATH
+ARG FILE_NAME
+RUN curl -OSL ${FTP_PATH} -o ${FILE_NAME} && \
+    pip --no-cache-dir install --upgrade ${FILE_NAME} && \
+    rm -f ${FILE_NAME}  
     
  
 ##################################################
