@@ -160,14 +160,11 @@ RUN ${PY} -m pip install xiaoyi --upgrade &&\
 # Install TensorFlow GPU version. #
 ###################################
 
-RUN cd /
-ARG FTP_PATH
-ARG FILE_NAME
-RUN curl -OSL ${FTP_PATH} -o ${FILE_NAME} && \
-    ${PY} -m pip --no-cache-dir install --upgrade ${FILE_NAME} && \
-    rm -f ${FILE_NAME}  
+RUN ${PY} -m pip --no-cache-dir install --upgrade tensorflow==1.13.1 && \
+#### Verify installation ######################
+python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 
-  
+
 ##################################################
 # Configure the build for our CUDA configuration #
 ##################################################
