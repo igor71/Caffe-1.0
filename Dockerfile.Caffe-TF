@@ -122,7 +122,7 @@ RUN cd /tmp && \
     make -j$nc && \
     make install && \
     # Check installed NCCL verion
-    updatedb && \
+    updatedb && ldconfig && \ 
     locate nccl| grep "libnccl.so" | tail -n1 | sed -r 's/^.*\.so\.//' && \
     cd .. && rm -rf nccl
     
