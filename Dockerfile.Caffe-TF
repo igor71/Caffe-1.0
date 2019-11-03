@@ -110,23 +110,6 @@ RUN ${PY} -m pip install xiaoyi --upgrade && \
     rm -rf /var/lib/apt/lists/*
     
     
-#############################################################
-#              Installing NCCL Packages                     #
-#############################################################
-
-RUN cd /tmp && \
-    git clone --branch=master --depth=1 https://github.com/NVIDIA/nccl.git && \
-    cd nccl && \
-    # Reduce the binary size, to only include the architecture of the target platforms
-    make -j$nc src.build NVCC_GENCODE="-gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70" && \
-    make -j$nc && \
-    make install && \
-    # Check installed NCCL verion
-    updatedb && ldconfig && \ 
-    locate nccl| grep "libnccl.so" | tail -n1 | sed -r 's/^.*\.so\.//' && \
-    cd .. && rm -rf nccl
-    
-    
 ###################################
 # Install TensorFlow GPU version. #
 ###################################
