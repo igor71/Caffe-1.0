@@ -17,7 +17,7 @@ pipeline {
 		            echo "Wrong Docker Image!!! Removing..."
                             docker rmi -f yi/tflow-gui:latest
                             pv -f /media/common/DOCKER_IMAGES/Tflow-GUI/9.0-cudnn7-base/yi-tflow-gui-1.12-new/yi-tflow-gui-1.12.tar | docker load
-                            docker tag bdccc25c5e3df2 yi/tflow-gui:latest
+                            docker tag bdccc25c5e3d yi/tflow-gui:latest
                          else
                             echo "Docker Image Already Exist"
                       fi
