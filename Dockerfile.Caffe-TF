@@ -124,7 +124,7 @@ RUN cd /tmp && \
     # Check installed NCCL verion
     updatedb && \
     locate nccl| grep "libnccl.so" | tail -n1 | sed -r 's/^.*\.so\.//' && \
-    cd .. && rm -rf nccl && \
+    cd .. && rm -rf nccl
     
     
 ###################################
