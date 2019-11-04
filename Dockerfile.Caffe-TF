@@ -33,7 +33,8 @@ RUN ${PY} --version && \
 RUN apt-get update && apt-get install -y --no-install-recommends \ 
          apt-utils \
          mlocate \
-         doxygen \		 
+         doxygen \
+	 cmake \
 	 libfreetype6-dev \
 	 libpng12-dev \ 
 	 libzmq3-dev \
@@ -45,27 +46,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          rm -rf /var/lib/apt/lists/* 
 	 
 	 
-#######################################
-#            Installing cmake         #
-#######################################
-
-RUN \
-    cd ~ && \
-    version=3.12 && \
-    build=3 && \
-    mkdir ~/temp && \
-    cd temp && \
-    wget https://cmake.org/files/v$version/cmake-$version.$build.tar.gz && \
-    tar -xzvf cmake-$version.$build.tar.gz && \
-    cd cmake-$version.$build && \
-    ./bootstrap && \
-    make -j$nc && \
-    make install && \
-    cmake --version && \
-    cd ~ && \
-    rm -rf temp
-    
- 
 ################################################################## 
 #              Pick up some TF dependencies                      #
 ##################################################################
@@ -100,7 +80,7 @@ RUN curl -OSL ${FTP_PATH} -o ${FILE_NAME} && \
     pip --no-cache-dir install --upgrade ${FILE_NAME} && \
     rm -f ${FILE_NAME} && \
 ## Verify Tensorflow Installation
-python -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
     
  
 ##################################################
