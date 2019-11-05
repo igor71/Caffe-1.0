@@ -29,7 +29,7 @@ RUN ${PY} --version && \
     curl -fSsL -O ftp://jenkins-cloud/pub/Develop/get-pip.py && \
     ${PY} get-pip.py && \
     rm get-pip.py && \
-    ${PY} -m pip --no-cache-dir install numpy==1.16.5
+    pip --no-cache-dir install --target=/usr/local/lib/python3.5/dist-packages numpy==1.16.5
 
 
 ############################################################
