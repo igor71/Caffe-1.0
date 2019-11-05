@@ -7,7 +7,8 @@ MAINTAINER Igor Rabkin <igor.rabkin@xiaoyi.com>
 #            Installing Dependences For Python v.3.6.8            #
 ###################################################################
 
-RUN apt-get update &&  apt-get install -y --no-install-recommends \
+RUN add-apt-repository ppa:jonathonf/python-3.6 && \
+    apt-get update &&  apt-get install -y --no-install-recommends \
     apt-utils \
     cmake \
     python3.6 \
