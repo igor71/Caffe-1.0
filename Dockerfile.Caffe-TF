@@ -69,6 +69,24 @@ RUN ${PY} -m pip install xiaoyi --upgrade && \
     rm -rf /var/lib/apt/lists/*
     
     
+#############################################################
+#              Installing NCCL Packages                     #
+#############################################################
+
+RUN cd /tmp && \
+    git clone --branch=master --depth=1 https://github.com/NVIDIA/nccl.git && \
+    cd nccl && \
+    # Reduce the binary size, to only include the architecture of the target platforms
+    make -j$nc src.build NVCC_GENCODE="-gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70" && \
+    make install && \
+    # Check installed NCCL verion
+    updatedb && ldconfig && \ 
+    locate nccl| grep "libnccl.so" | tail -n1 | sed -r 's/^.*\.so\.//' && \
+    cd .. && rm -rf nccl && \
+    apt-get clean && \ 
+    rm -rf /var/lib/apt/lists/*
+    
+    
 ###################################
 # Install TensorFlow GPU version. #
 ###################################
@@ -78,9 +96,12 @@ ARG FTP_PATH
 ARG FILE_NAME
 RUN curl -OSL ${FTP_PATH} -o ${FILE_NAME} && \
     pip --no-cache-dir install --upgrade ${FILE_NAME} && \
-    rm -f ${FILE_NAME}
+### Installing numpy compatible with TF ver 1.13.1
+    pip uninstall numpy && \
+    pip --no-cache-dir install numpy==1.16.5 
+    rm -f ${FILE_NAME} && \
 ## Verify Tensorflow Installation
-## ${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
     
  
 ##################################################
