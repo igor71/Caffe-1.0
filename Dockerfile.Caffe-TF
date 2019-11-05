@@ -98,7 +98,7 @@ RUN curl -OSL ${FTP_PATH} -o ${FILE_NAME} && \
     pip --no-cache-dir install --upgrade ${FILE_NAME} && \
 ### Installing numpy compatible with TF ver 1.13.1
     pip uninstall numpy && \
-    pip --no-cache-dir install numpy==1.16.5 
+    pip --no-cache-dir install numpy==1.16.5 && \
     rm -f ${FILE_NAME} && \
 ## Verify Tensorflow Installation
 ${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
