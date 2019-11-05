@@ -110,7 +110,6 @@ sed -i '28d' makefiles/common.mk && \
 sed -i '27 a CUDA8_GENCODE = -gencode=arch=compute_35,code=sm_35 \\' makefiles/common.mk && \
 ##### Reduce the binary size, to only include the architecture of the target platforms #####
 make -j$nc src.build NVCC_GENCODE="-gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_61,code=sm_61 -gencode=arch=compute_70,code=sm_70" && \
-make -j$nc && \
 make install && \
 ##### Checking installed NCCL verion #############################
 updatedb && \
