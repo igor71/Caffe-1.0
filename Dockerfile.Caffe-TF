@@ -122,8 +122,8 @@ sed -i '34 a set(python_version "3" CACHE STRING "Specify which Python version t
 cd build && \
 cmake -D CUDA_ARCH_NAME=Manual -D CUDA_ARCH_BIN="${CUDA_ARCH_BIN}" \
       -D USE_CUDNN=1 -D USE_NCCL=1 .. && \
-make -j$nc && \
-make pycaffe -j$nc && \
+make -j$nc || true && \
+make pycaffe -j$nc || true && \
 apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 
