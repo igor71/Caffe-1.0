@@ -44,7 +44,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	 pkg-config \  
 	 python3-tk \
 	 #### CAFFE Dependences ########
-	 ibatlas-base-dev \
+	 libatlas-base-dev \
          libboost-all-dev \
          libgflags-dev \
          libgoogle-glog-dev \
