@@ -67,3 +67,23 @@ ${PY} -c "import tensorflow as tf; print(tf.contrib.eager.num_gpus())"
 
 echo " Checking TF Computation Abilities: `${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"`"
 ```
+
+### Running CAFFE Benchmark Tests
+```
+yi-docker-run <<container_ID>>
+
+yi-dockeradmin <<container_name>>
+
+cd $CAFFE_ROOT
+
+./data/mnist/get_mnist.sh
+
+./examples/mnist/create_mnist.sh
+```
+Run Benchmark on CPU:
+
+`./build/tools/caffe time --model=examples/mnist/lenet_train_test.prototxt`
+
+Run Benchmark on GPU:
+
+`./build/tools/caffe time --model=examples/mnist/lenet_train_test.prototxt --gpu 0`
