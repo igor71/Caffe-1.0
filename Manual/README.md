@@ -52,4 +52,6 @@ bash install_tf.sh
 docker ps
 
 docker tag <IMAGE_ID> yi/tflow-vnc:caffe-1.12.3-python-3.5
+
+yi-docker tflow-vnc run :13  --version=caffe-1.12.3-python-3.5
 ```
