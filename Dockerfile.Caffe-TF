@@ -129,23 +129,12 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 # Install TensorFlow GPU version. #
 ###################################
 
-### Installing numpy compatible with TF version 1.12.3 
-RUN cd / && \
-    numpy_version=$(pip list | grep numpy | cut -d' ' -f16) && \
-    echo "Installed ver.$numpy_version" && \
-    if [ $numpy_version == 1.16.5 ] ; then echo " Requirement already satisfied: installed version $numpy_version" ; else pip uninstall -y numpy && pip --no-cache-dir install numpy==1.16.5 ; fi && \
-############################################################# 
-    curl -OSL ftp://jenkins-cloud/pub/Current/tensorflow_gpu-1.12.3-cp35-cp35m-manylinux1_x86_64.whl -o tensorflow_gpu-1.12.3-cp35-cp35m-manylinux1_x86_64.whl && \
-    pip --no-cache-dir install ${FILE_NAME} && \
-    rm -f ${FILE_NAME} && \
-    apt-get clean && \ 
-    rm -rf /var/lib/apt/lists/* && \
+COPY Manual/install_tf_only.sh /tmp
+RUN chmod u+x /tmp/install_tf_only.sh && /
+    bash /tmp/install_tf_only.sh && /
+    rm -f /tmp/install_tf_only.sh
     
-## Verify Tensorflow Installation
-   echo "Installed TF version: `${PY} -c "import tensorflow as tf; print(tf.__version__)"`" && \
-   ${PY} -c "import tensorflow as tf; print(tf.contrib.eager.num_gpus())" && \
-   echo " Checking TF Computation Abilities: `${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"`"
- 
+    
 ##################################################
 # Configure the build for our CUDA configuration #
 ##################################################
