@@ -130,9 +130,11 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 ###################################
 
 COPY Manual/install_tf_only.sh /tmp
+SHELL ["/bin/bash", "-c"]
 RUN chmod u+x /tmp/install_tf_only.sh && /
-    ./tmp/install_tf_only.sh && /
-    rm -f /tmp/install_tf_only.sh
+     cd /tmp && /
+    ./install_tf_only.sh && /
+    cd / && rm -f /tmp/install_tf_only.sh
     
     
 ##################################################
