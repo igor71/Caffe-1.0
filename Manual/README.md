@@ -57,7 +57,13 @@ yi-docker tflow-vnc run :13  --version=caffe-1.12.3-python-3.5
 
 yi-dockeradmin $USER-tflow-vnc
 
-cd /tmp
+#### Verify Tensorflow Installation ####
 
-bash check_tf_installation.sh
+PY=python3.5
+
+echo "Installed TF version: `${PY} -c "import tensorflow as tf; print(tf.__version__)"`"
+
+${PY} -c "import tensorflow as tf; print(tf.contrib.eager.num_gpus())"
+
+echo " Checking TF Computation Abilities: `${PY} -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"`"
 ```
