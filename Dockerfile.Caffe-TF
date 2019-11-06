@@ -129,12 +129,10 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 # Install TensorFlow GPU version. #
 ###################################
 
-COPY Manual/install_tf_only.sh /tmp
-SHELL ["/bin/bash", "-c"]
-RUN chmod u+x /tmp/install_tf_only.sh && \
-    ./tmp/install_tf_only.sh && \
-    rm -f /tmp/install_tf_only.sh
-    
+ADD Manual/install_tf_only.sh /tmp/install_tf_only.sh
+RUN chmod u+x /tmp/install_tf_only.sh 
+RUN ["/bin/bash", "-c", "source /tmp/install_tf_only.sh"]
+
     
 ##################################################
 # Configure the build for our CUDA configuration #
