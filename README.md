@@ -94,6 +94,6 @@ Run Benchmark on GPU:
 
 `./build/tools/caffe time --model=examples/mnist/lenet_train_test.prototxt --gpu 0`
 
-### Refernce:
+### Reference:
 
 https://github.com/adeelz92/Install-Caffe-on-Ubuntu-16.04-Python-3
